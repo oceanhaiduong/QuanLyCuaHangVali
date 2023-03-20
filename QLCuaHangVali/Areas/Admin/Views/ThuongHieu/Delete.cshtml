@@ -1,0 +1,42 @@
+﻿@model QLCuaHangVali.Models.THUONGHIEU
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+@section header{
+    <h2 style="text-align: center">Xóa thương hiệu</h2>
+
+    
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <table class="table" border="1px" style="text-align: center">
+                <tr>
+                    <th>Tên thương hiệu </th>
+                    <td> @Html.DisplayFor(model => model.tenthuonghieu)</td>
+                </tr>
+                <tr>
+                    <th>Mô tả </th>
+                    <td> @Html.DisplayFor(model => model.mota)</td>
+                </tr>
+            </table>
+
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+            <div style="text-align: right">
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+
+        }
+    </div>
+
+}

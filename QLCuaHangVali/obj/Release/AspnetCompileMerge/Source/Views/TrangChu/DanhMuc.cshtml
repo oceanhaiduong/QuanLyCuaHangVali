@@ -1,0 +1,8 @@
+﻿@model IEnumerable<QLCuaHangVali.Models.DANHMUCVALI>
+@foreach (var item in Model)
+{
+    <option  value="@Url.Action("DanhMucVali","TrangChu",new { id = item.madanhmuc})">
+            @item.tendanhmuc
+     </option>
+}
+

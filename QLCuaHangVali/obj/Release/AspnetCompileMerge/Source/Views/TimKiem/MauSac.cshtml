@@ -1,0 +1,13 @@
+﻿@model IEnumerable<QLCuaHangVali.Models.MAUSAC>
+<div style="width: 100%; display: flex; flex-wrap: wrap">
+    @foreach (var item in Model)
+    {
+        <li style="width: 50%">
+            <div style="width: 16px; height: 16px   ; border-radius: 50%;"></div>
+            <a class="color_mausac" style="color: black;" href="@Url.Action("MauSacTimKiem","TimKiem", new { id = item.mamausac})">@item.tenmausac</a>
+        </li>
+    }
+</div>
+
+
+

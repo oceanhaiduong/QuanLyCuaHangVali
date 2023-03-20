@@ -1,0 +1,182 @@
+﻿@using QLCuaHangVali.Models;
+@model List<GioHang>
+@{
+    ViewBag.Title = "Giohang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="privacy">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">
+            Giỏ Hàng
+            <span class="heading-style">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </h3>
+        <!-- //tittle heading -->
+        <div class="checkout-right">
+            <h4>
+                Giỏ hàng của bạn chứa:
+                <span>@Model.Count Sản phẩm</span>
+            </h4>
+            <div class="table-responsive">
+                <table class="timetable_sub">
+                    <thead>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Sản Phẩm</th>
+                            <th>Số Lượng</th>
+                            <th>Tên sản Phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Tổng tiền</th>
+                            <th>Xóa SP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int stt = 0; var sl = 0;}
+                        @foreach (var item in Model)
+                        {
+                            { stt++; sl = @item.isoluong; }
+                            <tr class="rem1">
+                                <td class="invert">@stt</td>
+                                <td class="invert-image">
+                                    <a href="#">
+                                        <img style="width: 120px" src="~/Content/AnhVali/@item.ianhvali" alt=" " class="img-responsive">
+                                    </a>
+                                </td>
+                                <td class="invert">
+                                    <div class="quantity">
+                                        <div class="quantity-select">
+                                            <div class="entry value-minus">&nbsp;</div>
+                                            <div class="entry value">
+                                                <span class="Soluong">@item.isoluong</span>
+                                            </div>
+                                            <div class="entry value-plus active">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="invert">@item.itenvali</td>
+                                <td>@String.Format("{0:0,0}", item.dDongia)</td>
+                                <td class="invert">@String.Format("{0:0,0}", item.dThanhtien)</td>
+                                <td class="invert">
+                                    <div class="rem">
+                                        <a href="@Url.Action("XoaGiohang","GioHang", new {imavali = item.imavali})"><div class="close1"> </div></a>
+                                   
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a href="@Url.Action("Xoatatcagiohang","GioHang")"  style="font-size: 16px; margin-top: 10px; float: right" class="btn btn-danger btn-sm me-1 mb-2"
+           title="Remove item">
+            <i class="fa fa-trash"></i>
+            <span>Xóa Tất cả</span>
+        </a>
+        <div style="margin-top: 20px">
+            <div>
+                <div style="margin-bottom: 6px">
+                    Tổng số lượng sản phẩm : @stt
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body p-4 d-flex flex-row">
+                        <span class="form-label">Shopee Voucher</span>
+                        <div class="form-outline flex-fill" style="display: flex">
+                            <input style="width: 200px" type="text" id="form1" class="form-control form-control-lg" />
+                            <a style="color: #ffa900; width: 100px; margin-left: 10px; border: 2px #ffa900 solid;" display: flex"; height: 40px" class="btn" href="#">Áp dụng</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="color: #ff5722; font-size: 18px; margin-bottom: 10px">
+                    Tổng thanh toán: @ViewBag.Tongtien
+                </div>
+            </div>
+            <div class="checkout_vali">
+                <a style="background-color: #ff5722; width: 200px; height: 40px" class="btn btn-success" href="@Url.Action("DatHang","GioHang")">Mua Ngay</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="~/Public/homepage/js/jquery-2.1.4.min.js"></script>
+<script src="~/Public/homepage/js/jquery.magnific-popup.js"></script>
+<!-- //cart-js -->
+<!--quantity-->
+<script>
+    $('.value-plus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'),
+            newVal = parseInt(divUpd.text(), 10) + 1;
+        divUpd.text(newVal);
+    });
+
+
+
+    $('.value-minus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'),
+            newVal = parseInt(divUpd.text(), 10) - 1;
+        if (newVal >= 1) divUpd.text(newVal);
+    });
+
+    $('.btn-danger').on('click', function () {
+        alert("Xóa giỏ hành thành công !")
+     
+    });
+</script>
+<!--quantity-->
+<!--//quantity-->
+<script src="~/Public/homepage/js/bootstrap.js"></script>
+
+@section scripts {
+    <script type="text/javascript">
+    $(function () {
+        $(".value-plus").click(function () {
+
+            //alert(123);
+            var model = {};
+            //lấy id sản phẩm
+            model.Name = $(".invert").text();
+            // lấy số lượng đặt hàng
+            model.Quantity = $(".Soluong").val
+      
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CapnhatGiohang", "GioHang")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    @*$('#CartCount').text(@Session["Count"] + 1);
+                    $('#Soluongton').text(@Session["CapNhatSoLuong"] - $("#iqQuantity").val());*@
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Thêm vào giỏ hàng thành công',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: thongbaoloi,
+                        text: 'Vui lòng thử lại!',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+            });
+            return false;
+        });
+    });
+    </script>
+
+
+
+
+}

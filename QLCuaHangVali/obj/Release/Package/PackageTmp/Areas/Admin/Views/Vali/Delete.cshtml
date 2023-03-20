@@ -1,0 +1,111 @@
+﻿@model QLCuaHangVali.Models.VALI
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+@section header{
+    <link href="~/Public/admin/css/cssAdmin.css" rel="stylesheet" />
+    <h2 style="text-align: center">Xóa Sản Phẩm</h2>
+
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+
+
+
+            <table class="table" border="1px" style="text-align: center">
+                <tr>
+                    <th>Tên vali </th>
+                    <td> @Html.DisplayFor(model => model.tenvali)</td>
+                </tr>
+                <tr>
+                    <th>Tên thương hiệu </th>
+                    <td> @Html.DisplayFor(model => model.THUONGHIEU.tenthuonghieu)</td>
+                </tr>
+                <tr>
+                    <th>Size </th>
+                    <td> @Html.DisplayFor(model => model.SIZEVALI.tensize)</td>
+                </tr>
+                <tr>
+                    <th>Tên danh mục  </th>
+                    <td> @Html.DisplayFor(model => model.DANHMUCVALI.tendanhmuc)</td>
+                </tr>
+                <tr>
+                    <th>Ảnh vali </th>
+                    <td>
+                        <img class="images_Product_Admin" src="~/Content/AnhVali/@Html.DisplayFor(model => model.anhvali)" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Mô tả </th>
+                    <td> @Html.DisplayFor(model => model.mota)</td>
+                </tr>
+                <tr>
+                    <th>Từ khóa </th>
+                    <td> @Html.DisplayFor(model => model.tukhoa)</td>
+                </tr>
+                <tr>
+                    <th>Số lượng tồn </th>
+                    <td> @Html.DisplayFor(model => model.soluongton)</td>
+                </tr>
+                <tr>
+                    <th>Giá gốc </th>
+                    <td> @Html.DisplayFor(model => model.gia)</td>
+                </tr>
+                <tr>
+                    <th>Giá khuyến mãi </th>
+                    <td> @Html.DisplayFor(model => model.giakhuyenmai)</td>
+                </tr>
+                <tr>
+                    <th>Ngày nhập hàng </th>
+                    <td> @Html.DisplayFor(model => model.ngaytao)</td>
+                </tr>
+                <tr>
+                    <th>Trạng thái </th>
+                    <td> @Html.DisplayFor(model => model.trangthai)</td>
+                </tr>
+                <tr>
+                    <th>Chất liệu </th>
+                    <td> @Html.DisplayFor(model => model.chatlieu)</td>
+                </tr>
+                <tr>
+                    <th>Kích thước</th>
+                    <td> @Html.DisplayFor(model => model.kichthuoc)</td>
+                </tr>
+                <tr>
+                    <th>Thể tích </th>
+                    <td> @Html.DisplayFor(model => model.thetich)</td>
+                </tr>
+                <tr>
+                    <th>Bánh xe</th>
+                    <td> @Html.DisplayFor(model => model.banhxe)</td>
+                </tr>
+                <tr>
+                    <th>Khóa </th>
+                    <td> @Html.DisplayFor(model => model.khoa)</td>
+                </tr>
+                <tr>
+                    <th>Tiện ích</th>
+                    <td> @Html.DisplayFor(model => model.tienich)</td>
+                </tr>
+
+
+            </table>
+
+
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+            <div style="text-align: right">
+                @Html.ActionLink("Quay lại", "Index")
+            </div>}
+    </div>
+
+}
